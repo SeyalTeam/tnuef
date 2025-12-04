@@ -12,6 +12,7 @@ import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { Slider } from '@/components/Slider'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -66,16 +67,44 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const { hero, layout } = page
 
+  // Fetch slider data for homepage
+  let sliderData: any[] = []
+  if (slug === 'home') {
+    const payload = await getPayload({ config: configPromise })
+    const sliders = await payload.find({
+      collection: 'sliders',
+      limit: 100,
+      sort: 'order',
+    })
+
+    sliderData = sliders.docs.map((slide: any) => ({
+      id: slide.id,
+      title: slide.title,
+      image: {
+        url: typeof slide.image === 'object' ? slide.image.url : '',
+        alt: typeof slide.image === 'object' ? slide.image.alt : slide.title,
+      },
+      link: slide.link,
+      order: slide.order,
+      active: slide.active,
+    }))
+  }
+
   return (
-    <article className="pt-16 pb-24">
+    <article className="pb-24">
       <PageClient />
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 
       {draft && <LivePreviewListener />}
 
-      <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} />
+      {/* Slider - Only on homepage */}
+      {slug === 'home' && sliderData.length > 0 && <Slider slides={sliderData} />}
+
+      <div className="pt-16">
+        <RenderHero {...hero} />
+        <RenderBlocks blocks={layout} />
+      </div>
     </article>
   )
 }

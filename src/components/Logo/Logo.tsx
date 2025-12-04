@@ -16,14 +16,14 @@ export const Logo = (props: Props) => {
   return (
     /* eslint-disable @next/next/no-img-element */
     <img
-      alt="Payload Logo"
-      width={193}
-      height={34}
+      alt="TNUEF Logo"
+      width={64}
+      height={64}
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
-      src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-logo-light.svg"
+      className={clsx('max-w-[4rem] w-full h-[64px]', className)}
+      src="https://upload.wikimedia.org/wikipedia/commons/4/44/Logo_of_Tamil_Nadu_Untouchability_Eradication_Front.jpg"
     />
   )
 }
