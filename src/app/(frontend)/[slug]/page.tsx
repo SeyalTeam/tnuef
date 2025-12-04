@@ -13,6 +13,7 @@ import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { Slider } from '@/components/Slider'
+import { LatestPosts } from '@/components/LatestPosts'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -69,6 +70,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   // Fetch slider data for homepage
   let sliderData: any[] = []
+  let latestPosts: any[] = []
   if (slug === 'home') {
     const payload = await getPayload({ config: configPromise })
     const sliders = await payload.find({
@@ -88,6 +90,13 @@ export default async function Page({ params: paramsPromise }: Args) {
       order: slide.order,
       active: slide.active,
     }))
+
+    const posts = await payload.find({
+      collection: 'posts',
+      limit: 3,
+      sort: '-publishedAt',
+    })
+    latestPosts = posts.docs
   }
 
   return (
@@ -100,6 +109,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       {/* Slider - Only on homepage */}
       {slug === 'home' && sliderData.length > 0 && <Slider slides={sliderData} />}
+
+      {/* Latest Posts - Only on homepage */}
+      {slug === 'home' && latestPosts.length > 0 && <LatestPosts posts={latestPosts} />}
 
       <div className="pt-16">
         <RenderHero {...hero} />
