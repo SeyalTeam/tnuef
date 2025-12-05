@@ -185,11 +185,6 @@ export default async function Page({ params: paramsPromise }: Args) {
 
           {/* News Board - Only on homepage */}
           {newsBoardPosts.length > 0 && <NewsBoard posts={newsBoardPosts} />}
-
-          <div className="pt-16">
-            <RenderHero {...hero} />
-            <RenderBlocks blocks={layout} />
-          </div>
         </>
       ) : (
         // Other pages layout (like post pages)
