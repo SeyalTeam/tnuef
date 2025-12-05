@@ -36,6 +36,7 @@ export const Media: CollectionConfig = {
   ],
   upload: {
     // Cloud storage is configured in payload.config.ts via cloudStoragePlugin
+    disableLocalStorage: true,
     adminThumbnail: 'thumbnail',
     focalPoint: true,
     imageSizes: [
