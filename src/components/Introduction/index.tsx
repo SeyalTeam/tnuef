@@ -23,7 +23,7 @@ export const IntroductionSection: React.FC<IntroductionProps> = ({ data }) => {
   const content = hero?.richText
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-gray-50 via-red-50/30 to-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-20">
           {/* Left Content Side */}
