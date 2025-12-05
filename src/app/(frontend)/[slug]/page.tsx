@@ -15,6 +15,8 @@ import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { Slider } from '@/components/Slider'
 import { LatestPosts } from '@/components/LatestPosts'
 import { IntroductionSection } from '@/components/Introduction'
+import { PageHero } from '@/heros/PageHero'
+import RichText from '@/components/RichText'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -129,19 +131,46 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      {/* Slider - Only on homepage */}
-      {slug === 'home' && sliderData.length > 0 && <Slider slides={sliderData} />}
+      {slug === 'home' ? (
+        // Homepage layout
+        <>
+          {/* Slider - Only on homepage */}
+          {sliderData.length > 0 && <Slider slides={sliderData} />}
 
-      {/* Latest Posts - Only on homepage */}
-      {slug === 'home' && latestPosts.length > 0 && <LatestPosts posts={latestPosts} />}
+          {/* Latest Posts - Only on homepage */}
+          {latestPosts.length > 0 && <LatestPosts posts={latestPosts} />}
 
-      {/* Introduction Section - Only on homepage */}
-      {slug === 'home' && introData && <IntroductionSection data={introData} />}
+          {/* Introduction Section - Only on homepage */}
+          {introData && <IntroductionSection data={introData} />}
 
-      <div className="pt-16">
-        <RenderHero {...hero} />
-        <RenderBlocks blocks={layout} />
-      </div>
+          <div className="pt-16">
+            <RenderHero {...hero} />
+            <RenderBlocks blocks={layout} />
+          </div>
+        </>
+      ) : (
+        // Other pages layout (like post pages)
+        <>
+          <PageHero page={page as any} />
+
+          <div className="flex flex-col items-center gap-4 pt-8">
+            <div className="container">
+              {hero?.richText && (
+                <RichText
+                  className="max-w-[48rem] mx-auto"
+                  data={hero.richText}
+                  enableGutter={false}
+                />
+              )}
+              {layout && layout.length > 0 && (
+                <div className="max-w-[48rem] mx-auto mt-8">
+                  <RenderBlocks blocks={layout} />
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </article>
   )
 }
