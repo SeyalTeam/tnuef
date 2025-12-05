@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -25,21 +26,32 @@ export const IntroductionSection: React.FC<IntroductionProps> = ({ data }) => {
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-          {/* Left Content Side */}
-          <div className="w-full lg:w-1/2 space-y-8 animate-fade-in-up">
-            <div className="space-y-4">
+        <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-20">
+          {/* Left Content Side - Fixed Height with Scroll */}
+          <div className="w-full lg:w-1/2 flex flex-col">
+            {/* Title (outside scrollable area) */}
+            <div className="space-y-4 mb-6">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight relative inline-block">
                 {title}
                 <span className="absolute -bottom-2 left-0 w-1/3 h-1.5 bg-[#D32F2F] rounded-full"></span>
               </h2>
             </div>
 
-            <div className="prose prose-lg text-gray-600 leading-relaxed">
-              {content && <RichText data={content} />}
+            {/* Scrollable Content Container - Matches Image Height */}
+            <div className="relative flex-1 lg:h-[500px] mb-6">
+              {/* Scrollable content */}
+              <div className="h-full overflow-y-auto pr-4 scrollbar-custom">
+                <div className="prose prose-lg text-gray-600 leading-relaxed">
+                  {content && <RichText data={content} />}
+                </div>
+              </div>
+
+              {/* Bottom fade gradient to indicate scrollable content */}
+              <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"></div>
             </div>
 
-            <div className="pt-4">
+            {/* Read More Button (outside scrollable area) */}
+            <div>
               <Link
                 href={`/${slug}`}
                 className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-[#D32F2F] hover:bg-[#B71C1C] rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
@@ -57,13 +69,13 @@ export const IntroductionSection: React.FC<IntroductionProps> = ({ data }) => {
             </div>
           </div>
 
-          {/* Right Image Side */}
-          <div className="w-full lg:w-1/2 relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
+          {/* Right Image Side - Fixed Height */}
+          <div className="w-full lg:w-1/2 relative lg:h-[500px]">
+            <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl group">
               {/* Decorative background element */}
               <div className="absolute -inset-4 bg-gradient-to-r from-[#D32F2F] to-orange-500 rounded-2xl opacity-20 blur-lg group-hover:opacity-30 transition-opacity duration-500"></div>
 
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-100">
+              <div className="relative h-full w-full overflow-hidden rounded-2xl bg-gray-100">
                 {image && image.url ? (
                   <Image
                     src={image.url}
@@ -82,6 +94,33 @@ export const IntroductionSection: React.FC<IntroductionProps> = ({ data }) => {
           </div>
         </div>
       </div>
+
+      {/* Custom scrollbar styles */}
+      <style jsx global>{`
+        .scrollbar-custom::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        .scrollbar-custom::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 10px;
+        }
+
+        .scrollbar-custom::-webkit-scrollbar-thumb {
+          background: #d32f2f;
+          border-radius: 10px;
+        }
+
+        .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+          background: #b71c1c;
+        }
+
+        /* For Firefox */
+        .scrollbar-custom {
+          scrollbar-width: thin;
+          scrollbar-color: #d32f2f #f1f1f1;
+        }
+      `}</style>
     </section>
   )
 }
