@@ -18,6 +18,7 @@ import { IntroductionSection } from '@/components/Introduction'
 import { PageHero } from '@/heros/PageHero'
 import RichText from '@/components/RichText'
 import { NewsBoard } from '@/components/NewsBoard'
+import { GalleryGrid } from '@/components/GalleryGrid'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -183,6 +184,24 @@ export default async function Page({ params: paramsPromise }: Args) {
     }
   }
 
+  // Fetch Gallery images
+  let galleryImages: any[] = []
+  if (slug === 'home') {
+    const payload = await getPayload({ config: configPromise })
+    const gallery = await payload.find({
+      collection: 'gallery',
+      where: {
+        active: {
+          equals: true,
+        },
+      },
+      limit: 16, // 4x4 grid
+      sort: 'order',
+      depth: 1,
+    })
+    galleryImages = gallery.docs
+  }
+
   return (
     <article className="pb-24">
       <PageClient />
@@ -205,6 +224,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 
           {/* News Board - Only on homepage */}
           {newsBoardPosts.length > 0 && <NewsBoard posts={newsBoardPosts} />}
+
+          {/* Gallery - Only on homepage */}
+          {galleryImages.length > 0 && <GalleryGrid images={galleryImages} />}
         </>
       ) : (
         // Other pages layout (like post pages)

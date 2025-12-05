@@ -72,6 +72,7 @@ export interface Config {
     media: Media;
     categories: Category;
     sliders: Slider;
+    gallery: Gallery;
     users: User;
     redirects: Redirect;
     forms: Form;
@@ -95,6 +96,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     sliders: SlidersSelect<false> | SlidersSelect<true>;
+    gallery: GallerySelect<false> | GallerySelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -811,6 +813,31 @@ export interface Slider {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery".
+ */
+export interface Gallery {
+  id: string;
+  /**
+   * Title for the gallery image (for admin reference)
+   */
+  title: string;
+  /**
+   * Upload gallery image
+   */
+  image: string | Media;
+  /**
+   * Order of appearance (lower numbers appear first)
+   */
+  order: number;
+  /**
+   * Show/hide this image in gallery
+   */
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1018,6 +1045,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'sliders';
         value: string | Slider;
+      } | null)
+    | ({
+        relationTo: 'gallery';
+        value: string | Gallery;
       } | null)
     | ({
         relationTo: 'users';
@@ -1373,6 +1404,18 @@ export interface SlidersSelect<T extends boolean = true> {
   title?: T;
   image?: T;
   link?: T;
+  order?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
   order?: T;
   active?: T;
   updatedAt?: T;
