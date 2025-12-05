@@ -35,8 +35,13 @@ export const IntroductionSection: React.FC<IntroductionProps> = ({ data }) => {
               </h2>
             </div>
 
-            <div className="prose prose-lg text-gray-600 leading-relaxed flex-grow mb-8">
-              {content && <RichText data={content} />}
+            {/* Content container with fixed height matching image */}
+            <div className="relative flex-grow mb-6">
+              <div className="prose prose-lg text-gray-600 leading-relaxed max-h-[400px] overflow-hidden">
+                {content && <RichText data={content} />}
+              </div>
+              {/* Gradient fade at bottom */}
+              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
             </div>
 
             {/* Read More button at bottom */}
