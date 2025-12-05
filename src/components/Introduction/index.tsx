@@ -38,10 +38,10 @@ export const IntroductionSection: React.FC<IntroductionProps> = ({ data }) => {
             </div>
 
             {/* Scrollable Content Container - Matches Image Height */}
-            <div className="relative flex-1 lg:h-[500px] mb-6">
+            <div className="relative flex-1 lg:h-[700px] mb-6">
               {/* Scrollable content */}
               <div className="h-full overflow-y-auto pr-4 scrollbar-custom">
-                <div className="prose prose-lg text-gray-600 leading-relaxed">
+                <div className="prose prose-lg text-gray-600 leading-relaxed max-w-none">
                   {content && <RichText data={content} />}
                 </div>
               </div>
@@ -70,7 +70,7 @@ export const IntroductionSection: React.FC<IntroductionProps> = ({ data }) => {
           </div>
 
           {/* Right Image Side - Fixed Height */}
-          <div className="w-full lg:w-1/2 relative lg:h-[500px]">
+          <div className="w-full lg:w-1/2 relative lg:h-[700px]">
             <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl group">
               {/* Decorative background element */}
               <div className="absolute -inset-4 bg-gradient-to-r from-[#D32F2F] to-orange-500 rounded-2xl opacity-20 blur-lg group-hover:opacity-30 transition-opacity duration-500"></div>
