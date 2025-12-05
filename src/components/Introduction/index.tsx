@@ -65,11 +65,11 @@ export const IntroductionSection: React.FC<IntroductionProps> = ({ data }) => {
 
           {/* Right Image Side */}
           <div className="w-full lg:w-1/2 flex items-stretch">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl group w-full">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl group w-full min-h-[400px]">
               {/* Decorative background element */}
               <div className="absolute -inset-4 bg-gradient-to-r from-[#D32F2F] to-orange-500 rounded-2xl opacity-20 blur-lg group-hover:opacity-30 transition-opacity duration-500"></div>
 
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-100">
+              <div className="relative w-full h-full overflow-hidden rounded-2xl bg-gray-100">
                 {image && image.url ? (
                   <Image
                     src={image.url}
