@@ -77,6 +77,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       collection: 'sliders',
       limit: 100,
       sort: 'order',
+      depth: 1, // Populate the image relationship
     })
 
     sliderData = sliders.docs.map((slide: any) => ({
