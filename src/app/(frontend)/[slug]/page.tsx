@@ -14,6 +14,7 @@ import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { Slider } from '@/components/Slider'
 import { LatestPosts } from '@/components/LatestPosts'
+import { IntroductionSection } from '@/components/Introduction'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -101,6 +102,25 @@ export default async function Page({ params: paramsPromise }: Args) {
     latestPosts = posts.docs
   }
 
+  // Fetch Introduction page data
+  let introData = null
+  if (slug === 'home') {
+    const payload = await getPayload({ config: configPromise })
+    const introPage = await payload.find({
+      collection: 'pages',
+      where: {
+        slug: {
+          equals: 'introduction',
+        },
+      },
+      limit: 1,
+    })
+
+    if (introPage.docs.length > 0) {
+      introData = introPage.docs[0]
+    }
+  }
+
   return (
     <article className="pb-24">
       <PageClient />
@@ -114,6 +134,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       {/* Latest Posts - Only on homepage */}
       {slug === 'home' && latestPosts.length > 0 && <LatestPosts posts={latestPosts} />}
+
+      {/* Introduction Section - Only on homepage */}
+      {slug === 'home' && introData && <IntroductionSection data={introData} />}
 
       <div className="pt-16">
         <RenderHero {...hero} />
