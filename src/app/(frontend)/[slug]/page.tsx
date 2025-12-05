@@ -96,8 +96,28 @@ export default async function Page({ params: paramsPromise }: Args) {
       active: slide.active,
     }))
 
+    // Find news-board category ID to exclude it
+    const newsBoardCat = await payload.find({
+      collection: 'categories',
+      where: {
+        slug: {
+          equals: 'news-board',
+        },
+      },
+      limit: 1,
+    })
+
+    const newsBoardCategoryId = newsBoardCat.docs.length > 0 ? newsBoardCat.docs[0].id : null
+
     const posts = await payload.find({
       collection: 'posts',
+      where: newsBoardCategoryId
+        ? {
+            categories: {
+              not_in: [newsBoardCategoryId],
+            },
+          }
+        : {},
       limit: 3,
       sort: '-publishedAt',
       depth: 1, // Populate relationships like heroImage
