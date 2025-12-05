@@ -17,6 +17,7 @@ import { LatestPosts } from '@/components/LatestPosts'
 import { IntroductionSection } from '@/components/Introduction'
 import { PageHero } from '@/heros/PageHero'
 import RichText from '@/components/RichText'
+import { NewsBoard } from '@/components/NewsBoard'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -123,6 +124,45 @@ export default async function Page({ params: paramsPromise }: Args) {
     }
   }
 
+  // Fetch news board posts (from news-board category)
+  let newsBoardPosts: any[] = []
+  if (slug === 'home') {
+    const payload = await getPayload({ config: configPromise })
+
+    // Find the news-board category first
+    const newsBoardCategory = await payload.find({
+      collection: 'categories',
+      where: {
+        slug: {
+          equals: 'news-board',
+        },
+      },
+      limit: 1,
+    })
+
+    if (newsBoardCategory.docs.length > 0) {
+      const categoryId = newsBoardCategory.docs[0].id
+
+      // Fetch posts from this category
+      const boardPosts = await payload.find({
+        collection: 'posts',
+        where: {
+          categories: {
+            contains: categoryId,
+          },
+          _status: {
+            equals: 'published',
+          },
+        },
+        limit: 6,
+        sort: '-publishedAt',
+        depth: 1,
+      })
+
+      newsBoardPosts = boardPosts.docs
+    }
+  }
+
   return (
     <article className="pb-24">
       <PageClient />
@@ -142,6 +182,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 
           {/* Introduction Section - Only on homepage */}
           {introData && <IntroductionSection data={introData} />}
+
+          {/* News Board - Only on homepage */}
+          {newsBoardPosts.length > 0 && <NewsBoard posts={newsBoardPosts} />}
 
           <div className="pt-16">
             <RenderHero {...hero} />
