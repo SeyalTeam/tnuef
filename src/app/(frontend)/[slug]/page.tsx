@@ -95,6 +95,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       collection: 'posts',
       limit: 3,
       sort: '-publishedAt',
+      depth: 1, // Populate relationships like heroImage
     })
     latestPosts = posts.docs
   }

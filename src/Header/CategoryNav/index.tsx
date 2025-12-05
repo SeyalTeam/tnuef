@@ -46,7 +46,8 @@ export const CategoryNav: React.FC = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/categories')
+        // Use relative URL to work in both local and production
+        const response = await fetch('/api/categories')
         const data: CategoryResponse = await response.json()
         setCategories(data.docs)
       } catch (error) {
