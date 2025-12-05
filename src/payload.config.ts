@@ -17,6 +17,7 @@ import { Header } from './Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
+import { cloudStoragePlugin } from './plugins/cloudStorage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -68,6 +69,7 @@ export default buildConfig({
   globals: [Header, Footer],
   plugins: [
     ...plugins,
+    cloudStoragePlugin,
     // storage-adapter-placeholder
   ],
   secret: process.env.PAYLOAD_SECRET,
