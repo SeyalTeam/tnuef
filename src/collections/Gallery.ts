@@ -28,15 +28,6 @@ export const Gallery: CollectionConfig = {
       },
     },
     {
-      name: 'order',
-      type: 'number',
-      required: true,
-      defaultValue: 0,
-      admin: {
-        description: 'Order of appearance (lower numbers appear first)',
-      },
-    },
-    {
       name: 'active',
       type: 'checkbox',
       defaultValue: true,

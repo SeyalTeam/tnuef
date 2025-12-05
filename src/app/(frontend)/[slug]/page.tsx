@@ -196,7 +196,7 @@ export default async function Page({ params: paramsPromise }: Args) {
         },
       },
       limit: 16, // 4x4 grid
-      sort: 'order',
+      sort: '-createdAt',
       depth: 1,
     })
     galleryImages = gallery.docs

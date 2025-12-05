@@ -49,12 +49,11 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ images }) => {
       <section className="py-20 bg-gradient-to-b from-white to-gray-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Gallery</h2>
-            <p className="text-gray-600 text-lg">Browse our photo collection</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">புகைப்படங்கள்</h2>
           </div>
 
           {/* 4x4 Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
             {images.map((item, index) => {
               const image = item.image as Media
               if (!image || !image.url) return null
@@ -62,7 +61,7 @@ export const GalleryGrid: React.FC<GalleryGridProps> = ({ images }) => {
               return (
                 <div
                   key={item.id}
-                  className="group relative aspect-square overflow-hidden rounded-lg cursor-pointer bg-gray-200 hover:shadow-2xl transition-all duration-300"
+                  className="group relative aspect-video overflow-hidden rounded-lg cursor-pointer bg-gray-200 hover:shadow-2xl transition-all duration-300"
                   onClick={() => openLightbox(index)}
                 >
                   <Image

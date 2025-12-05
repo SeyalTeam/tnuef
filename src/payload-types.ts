@@ -826,10 +826,6 @@ export interface Gallery {
    */
   image: string | Media;
   /**
-   * Order of appearance (lower numbers appear first)
-   */
-  order: number;
-  /**
    * Show/hide this image in gallery
    */
   active?: boolean | null;
@@ -1416,7 +1412,6 @@ export interface SlidersSelect<T extends boolean = true> {
 export interface GallerySelect<T extends boolean = true> {
   title?: T;
   image?: T;
-  order?: T;
   active?: T;
   updatedAt?: T;
   createdAt?: T;
