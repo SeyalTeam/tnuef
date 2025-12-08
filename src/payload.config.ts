@@ -13,6 +13,7 @@ import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { Sliders } from './collections/Sliders'
 import { Gallery } from './collections/Gallery'
+import { Posters } from './collections/Posters'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { SiteSettings } from './globals/SiteSettings'
@@ -63,7 +64,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Sliders, Gallery, Users],
+  collections: [Pages, Posts, Media, Categories, Sliders, Gallery, Posters, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, SiteSettings],
   plugins: [

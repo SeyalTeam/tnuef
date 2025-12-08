@@ -73,6 +73,7 @@ export interface Config {
     categories: Category;
     sliders: Slider;
     gallery: Gallery;
+    posters: Poster;
     users: User;
     redirects: Redirect;
     forms: Form;
@@ -97,6 +98,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     sliders: SlidersSelect<false> | SlidersSelect<true>;
     gallery: GallerySelect<false> | GallerySelect<true>;
+    posters: PostersSelect<false> | PostersSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -836,6 +838,27 @@ export interface Gallery {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posters".
+ */
+export interface Poster {
+  id: string;
+  /**
+   * Title for the poster image (for admin reference)
+   */
+  title: string;
+  /**
+   * Upload poster image
+   */
+  image: string | Media;
+  /**
+   * Show/hide this image in posters
+   */
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1047,6 +1070,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'gallery';
         value: string | Gallery;
+      } | null)
+    | ({
+        relationTo: 'posters';
+        value: string | Poster;
       } | null)
     | ({
         relationTo: 'users';
@@ -1412,6 +1439,17 @@ export interface SlidersSelect<T extends boolean = true> {
  * via the `definition` "gallery_select".
  */
 export interface GallerySelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posters_select".
+ */
+export interface PostersSelect<T extends boolean = true> {
   title?: T;
   image?: T;
   active?: T;
