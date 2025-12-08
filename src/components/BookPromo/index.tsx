@@ -59,7 +59,7 @@ export const BookPromo: React.FC<BookPromoProps> = ({ initialDownloadCount }) =>
                   எந்தவிதக் கட்டணமும் இல்லாமல் மின்னணு புத்தகமாக வெளியாகிறது. தோழர்கள்,
                   நண்பர்களுக்கு, உறவினர்களுக்கு இதை அனுப்பி வையுங்கள்.
                 </p>
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col items-start gap-4">
                   <a
                     href="https://drive.google.com/uc?export=download&id=1AW4lnRRaZ8KQqAI3W5jYHnQxrLCbSdOe"
                     onClick={handleDownload}
@@ -81,7 +81,9 @@ export const BookPromo: React.FC<BookPromoProps> = ({ initialDownloadCount }) =>
                     </svg>
                     பதிவிறக்கம் (Download PDF)
                   </a>
-                  <span className="text-lg font-bold text-gray-700">{downloadCount} downloads</span>
+                  <span className="text-sm font-medium text-gray-500 ml-1">
+                    {downloadCount} downloads
+                  </span>
                 </div>
               </div>
             </div>

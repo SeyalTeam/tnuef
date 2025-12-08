@@ -1,3 +1,4 @@
+'use client'
 import { Menu, X } from 'lucide-react'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import Link from 'next/link'
