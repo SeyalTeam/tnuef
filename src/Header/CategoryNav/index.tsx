@@ -20,7 +20,17 @@ interface CategoryResponse {
   docs: Category[]
 }
 
-export const CategoryNav: React.FC = () => {
+interface CategoryNavProps {
+  className?: string
+  isMobile?: boolean
+  closeMobileMenu?: () => void
+}
+
+export const CategoryNav: React.FC<CategoryNavProps> = ({
+  className,
+  isMobile,
+  closeMobileMenu,
+}) => {
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
@@ -73,11 +83,23 @@ export const CategoryNav: React.FC = () => {
   }
 
   const handleMouseEnter = (categoryId: string) => {
-    setOpenDropdown(categoryId)
+    if (!isMobile) {
+      setOpenDropdown(categoryId)
+    }
   }
 
   const handleMouseLeave = () => {
-    setOpenDropdown(null)
+    if (!isMobile) {
+      setOpenDropdown(null)
+    }
+  }
+
+  const toggleDropdown = (categoryId: string) => {
+    if (openDropdown === categoryId) {
+      setOpenDropdown(null)
+    } else {
+      setOpenDropdown(categoryId)
+    }
   }
 
   if (loading) {
@@ -91,28 +113,34 @@ export const CategoryNav: React.FC = () => {
   }
 
   return (
-    <nav className="flex items-center gap-2">
+    <nav
+      className={`flex ${isMobile ? 'flex-col items-start w-full' : 'items-center gap-2'} ${className || ''}`}
+    >
       {parentCategories.map((category) => {
         const children = getChildren(category.id)
         const hasChildren = children.length > 0
+        const isOpen = openDropdown === category.id
 
         return (
           <div
             key={category.id}
-            className="relative"
+            className={`relative ${isMobile ? 'w-full' : ''}`}
             onMouseEnter={() => hasChildren && handleMouseEnter(category.id)}
             onMouseLeave={handleMouseLeave}
           >
             {hasChildren ? (
               <button
-                className="px-4 py-2 text-white hover:bg-white/10 rounded transition-all duration-200 flex items-center gap-1 font-medium"
+                className={`px-4 py-2 text-white hover:bg-white/10 rounded transition-all duration-200 flex items-center gap-1 font-medium ${
+                  isMobile ? 'w-full justify-between' : ''
+                }`}
                 aria-haspopup="true"
-                aria-expanded={openDropdown === category.id}
+                aria-expanded={isOpen}
+                onClick={() => isMobile && toggleDropdown(category.id)}
               >
                 {getDisplayName(category)}
                 <svg
                   className={`w-4 h-4 transition-transform duration-200 ${
-                    openDropdown === category.id ? 'rotate-180' : ''
+                    isOpen ? 'rotate-180' : ''
                   }`}
                   fill="none"
                   stroke="currentColor"
@@ -129,20 +157,34 @@ export const CategoryNav: React.FC = () => {
             ) : (
               <Link
                 href={`/${category.slug}`}
-                className="px-4 py-2 text-white hover:bg-white/10 rounded transition-all duration-200 block font-medium"
+                className={`px-4 py-2 text-white hover:bg-white/10 rounded transition-all duration-200 block font-medium ${
+                  isMobile ? 'w-full' : ''
+                }`}
+                onClick={() => closeMobileMenu && closeMobileMenu()}
               >
                 {getDisplayName(category)}
               </Link>
             )}
 
             {/* Dropdown Menu */}
-            {hasChildren && openDropdown === category.id && (
-              <div className="absolute top-full left-0 mt-1 bg-white shadow-lg rounded-md overflow-hidden min-w-[200px] z-50 animate-fadeIn">
+            {hasChildren && isOpen && (
+              <div
+                className={
+                  isMobile
+                    ? 'bg-black/20 w-full pl-4 mt-1 rounded-md overflow-hidden animate-fadeIn'
+                    : 'absolute top-full left-0 mt-1 bg-white shadow-lg rounded-md overflow-hidden min-w-[200px] z-50 animate-fadeIn'
+                }
+              >
                 {children.map((child) => (
                   <Link
                     key={child.id}
                     href={`/${child.slug}`}
-                    className="block px-4 py-3 text-gray-800 hover:bg-[#D32F2F] hover:text-white transition-all duration-200"
+                    className={`block px-4 py-3 text-white/90 hover:text-white transition-all duration-200 ${
+                      isMobile
+                        ? 'text-sm border-l border-white/20 hover:bg-white/10'
+                        : 'text-gray-800 hover:bg-[#D32F2F] hover:text-white'
+                    }`}
+                    onClick={() => closeMobileMenu && closeMobileMenu()}
                   >
                     {getDisplayName(child)}
                   </Link>
