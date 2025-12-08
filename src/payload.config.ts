@@ -15,6 +15,7 @@ import { Sliders } from './collections/Sliders'
 import { Gallery } from './collections/Gallery'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
+import { SiteSettings } from './globals/SiteSettings'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -67,7 +68,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Media, Categories, Sliders, Gallery, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, SiteSettings],
   plugins: [
     ...plugins,
     cloudStoragePlugin,

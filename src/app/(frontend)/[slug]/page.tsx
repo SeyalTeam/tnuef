@@ -19,6 +19,7 @@ import { PageHero } from '@/heros/PageHero'
 import RichText from '@/components/RichText'
 import { NewsBoard } from '@/components/NewsBoard'
 import { GalleryGrid } from '@/components/GalleryGrid'
+import { BookPromo } from '@/components/BookPromo'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -147,8 +148,20 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   // Fetch news board posts (from news-board category)
   let newsBoardPosts: any[] = []
+  let bookDownloadCount = 0
+
   if (slug === 'home') {
     const payload = await getPayload({ config: configPromise })
+
+    // Fetch site settings for download count
+    try {
+      const siteSettings = await payload.findGlobal({
+        slug: 'site-settings' as any,
+      })
+      bookDownloadCount = (siteSettings as any).bookDownloadCount || 0
+    } catch (error) {
+      console.error('Error fetching site settings', error)
+    }
 
     // Find the news-board category first
     const newsBoardCategory = await payload.find({
@@ -224,6 +237,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 
           {/* News Board - Only on homepage */}
           {newsBoardPosts.length > 0 && <NewsBoard posts={newsBoardPosts} />}
+
+          {/* Book Promo Section */}
+          <BookPromo initialDownloadCount={bookDownloadCount} />
 
           {/* Gallery - Only on homepage */}
           {galleryImages.length > 0 && <GalleryGrid images={galleryImages} />}
