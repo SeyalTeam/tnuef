@@ -59,7 +59,7 @@ export const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {
                     )}
                   </div>
                   <div className="p-4 flex-grow flex flex-col">
-                    <h3 className="text-xl font-semibold mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-xl font-semibold mb-2 line-clamp-2 text-gray-900 group-hover:text-blue-600 transition-colors">
                       {post.title}
                     </h3>
                     <div className="mt-auto flex items-center text-gray-500 text-sm">
