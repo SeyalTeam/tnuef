@@ -156,7 +156,7 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({
               </button>
             ) : (
               <Link
-                href={`/${category.slug}`}
+                href={`/category/${category.slug}`}
                 className={`px-4 py-2 text-white hover:bg-white/10 rounded transition-all duration-200 block font-medium ${
                   isMobile ? 'w-full' : ''
                 }`}
@@ -178,7 +178,7 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({
                 {children.map((child) => (
                   <Link
                     key={child.id}
-                    href={`/${child.slug}`}
+                    href={`/category/${child.slug}`}
                     className={`block px-4 py-3 text-white/90 hover:text-white transition-all duration-200 ${
                       isMobile
                         ? 'text-sm border-l border-white/20 hover:bg-white/10'
