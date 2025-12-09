@@ -63,7 +63,7 @@ export const BookPromo: React.FC<BookPromoProps> = ({ initialDownloadCount }) =>
                   <a
                     href="https://drive.google.com/uc?export=download&id=1AW4lnRRaZ8KQqAI3W5jYHnQxrLCbSdOe"
                     onClick={handleDownload}
-                    className="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-md transition-colors duration-200 group no-underline whitespace-nowrap"
+                    className="inline-flex items-center px-4 py-3 md:px-6 md:py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-md transition-colors duration-200 group no-underline text-sm md:text-base"
                   >
                     <svg
                       className="w-5 h-5 mr-2 group-hover:animate-bounce"
