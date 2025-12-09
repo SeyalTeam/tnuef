@@ -63,6 +63,9 @@ export default buildConfig({
   editor: defaultLexical,
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
+    connectOptions: {
+      maxPoolSize: 10,
+    },
   }),
   collections: [Pages, Posts, Media, Categories, Sliders, Gallery, Posters, Users],
   cors: [getServerSideURL()].filter(Boolean),
