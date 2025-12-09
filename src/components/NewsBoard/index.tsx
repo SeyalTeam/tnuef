@@ -45,11 +45,10 @@ export const NewsBoard: React.FC<NewsBoardProps> = ({ posts }) => {
             </span>
             <div className="absolute -bottom-2 left-0 right-0 h-1 bg-yellow-300 opacity-60"></div>
           </h2>
-          <p className="text-yellow-100 text-lg mt-6 opacity-80">News Board</p>
         </div>
 
         {/* Notice Board Grid */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 max-w-6xl mx-auto scroll-smooth no-scrollbar">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {posts.map((post) => {
             const date = new Date(post.publishedAt)
             const formattedDate = date.toLocaleDateString('en-GB', {
@@ -64,11 +63,7 @@ export const NewsBoard: React.FC<NewsBoardProps> = ({ posts }) => {
             }
 
             return (
-              <Link
-                href={`/posts/${post.slug}`}
-                key={post.id}
-                className="group min-w-[85vw] flex-shrink-0 snap-center md:min-w-0 md:w-auto"
-              >
+              <Link href={`/posts/${post.slug}`} key={post.id} className="group">
                 <div className="bg-yellow-50 rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 hover:rotate-1 relative">
                   {/* Pin/Thumbtack */}
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-red-500 rounded-full shadow-lg flex items-center justify-center z-10">
