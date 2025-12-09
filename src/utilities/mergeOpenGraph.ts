@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getServerSideURL } from './getURL'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
@@ -6,7 +7,7 @@ const defaultOpenGraph: Metadata['openGraph'] = {
     'Tamil Nadu Untouchability Eradication Front - Working towards social equality and justice.',
   images: [
     {
-      url: `https://tnuef.com/api/media/file/tnuefbanner%20(1).png`,
+      url: `${getServerSideURL()}/website-template-OG.webp`,
     },
   ],
   siteName: 'TNUEF',
