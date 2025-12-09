@@ -120,6 +120,6 @@ export const getLatestTweetImages = async (): Promise<TweetImage[]> => {
     return stories
   } catch (error) {
     console.error('Error fetching tweets:', error)
-    return getMockImages() // Fallback to mock on error
+    return [] // Return empty on error so we don't show mock data if token exists but fails
   }
 }
