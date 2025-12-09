@@ -23,7 +23,10 @@ export const IntroductionSection: React.FC<IntroductionProps> = ({ data }) => {
   const content = hero?.richText
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-red-50/30 to-white overflow-hidden">
+    <section
+      className="py-20 bg-gradient-to-br from-[#FAFAFA] via-[#FEF2F2]/30 to-white overflow-hidden"
+      data-theme="light"
+    >
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-20">
           {/* Left Content Side */}
@@ -37,7 +40,7 @@ export const IntroductionSection: React.FC<IntroductionProps> = ({ data }) => {
 
             {/* Content container with fixed height matching image */}
             <div className="relative flex-grow mb-6">
-              <div className="prose prose-lg text-gray-600 leading-relaxed max-h-[400px] overflow-hidden">
+              <div className="prose prose-lg text-gray-700 leading-relaxed max-h-[400px] overflow-hidden">
                 {content && <RichText data={content} />}
               </div>
               {/* Gradient fade at bottom */}
