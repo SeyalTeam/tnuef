@@ -61,6 +61,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       slug: true,
       categories: true,
       meta: true,
+      heroImage: true,
     },
   })
 
