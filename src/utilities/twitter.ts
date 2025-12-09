@@ -44,8 +44,8 @@ export const getLatestTweetImages = async (): Promise<TweetImage[]> => {
   ]
 
   if (!token) {
-    console.warn('TWITTER_BEARER_TOKEN is not set. Returning empty.')
-    return [] // getMockImages()
+    console.warn('TWITTER_BEARER_TOKEN is not set. Returning mock data.')
+    return getMockImages()
   }
 
   try {
@@ -120,6 +120,6 @@ export const getLatestTweetImages = async (): Promise<TweetImage[]> => {
     return stories
   } catch (error) {
     console.error('Error fetching tweets:', error)
-    return [] // getMockImages() // Fallback to mock on error
+    return getMockImages() // Fallback to mock on error
   }
 }
