@@ -8,7 +8,7 @@ import React, { cache } from 'react'
 import { homeStatic } from '@/endpoints/seed/home-static'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
-import { RenderHero } from '@/heros/RenderHero'
+
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
@@ -19,6 +19,7 @@ import { PageHero } from '@/heros/PageHero'
 import RichText from '@/components/RichText'
 import { NewsBoard } from '@/components/NewsBoard'
 import { GalleryGrid } from '@/components/GalleryGrid'
+import { LeadersBanner } from '@/components/LeadersBanner'
 import { BookPromo } from '@/components/BookPromo'
 import { TwitterStories } from '@/components/TwitterStories'
 import { getLatestTweetImages } from '@/utilities/twitter'
@@ -244,6 +245,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 
           {/* Introduction Section - Only on homepage */}
           {introData && <IntroductionSection data={introData} />}
+
+          {/* Leaders Banner - Only on homepage */}
+          <LeadersBanner />
 
           {/* News Board - Only on homepage */}
           {newsBoardPosts.length > 0 && <NewsBoard posts={newsBoardPosts} />}
