@@ -20,6 +20,8 @@ import RichText from '@/components/RichText'
 import { NewsBoard } from '@/components/NewsBoard'
 import { GalleryGrid } from '@/components/GalleryGrid'
 import { BookPromo } from '@/components/BookPromo'
+import { TwitterStories } from '@/components/TwitterStories'
+import { getLatestTweetImages } from '@/utilities/twitter'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -77,7 +79,12 @@ export default async function Page({ params: paramsPromise }: Args) {
   // Fetch slider data for homepage
   let sliderData: any[] = []
   let latestPosts: any[] = []
+  let tweetImages: any[] = [] // Twitter stories data
+
   if (slug === 'home') {
+    // Fetch Twitter images (stories)
+    tweetImages = await getLatestTweetImages()
+
     const payload = await getPayload({ config: configPromise })
     const sliders = await payload.find({
       collection: 'sliders',
@@ -228,6 +235,9 @@ export default async function Page({ params: paramsPromise }: Args) {
         <>
           {/* Slider - Only on homepage */}
           {sliderData.length > 0 && <Slider slides={sliderData} />}
+
+          {/* Twitter Stories - Only on homepage */}
+          {tweetImages.length > 0 && <TwitterStories stories={tweetImages} />}
 
           {/* Latest Posts - Only on homepage */}
           {latestPosts.length > 0 && <LatestPosts posts={latestPosts} />}
