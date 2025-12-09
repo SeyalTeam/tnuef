@@ -24,7 +24,7 @@ export const IntroductionSection: React.FC<IntroductionProps> = ({ data }) => {
 
   return (
     <section
-      className="py-20 bg-gradient-to-br from-[#FAFAFA] via-[#FEF2F2]/30 to-white overflow-hidden"
+      className="py-20 bg-white bg-gradient-to-br from-[#FAFAFA] via-[#FEF2F2] to-white overflow-hidden"
       data-theme="light"
     >
       <div className="container mx-auto px-4">
