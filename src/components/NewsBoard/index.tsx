@@ -49,7 +49,7 @@ export const NewsBoard: React.FC<NewsBoardProps> = ({ posts }) => {
         </div>
 
         {/* Notice Board Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:overflow-visible md:pb-0 max-w-6xl mx-auto scroll-smooth no-scrollbar">
           {posts.map((post) => {
             const date = new Date(post.publishedAt)
             const formattedDate = date.toLocaleDateString('en-GB', {
@@ -64,7 +64,11 @@ export const NewsBoard: React.FC<NewsBoardProps> = ({ posts }) => {
             }
 
             return (
-              <Link href={`/posts/${post.slug}`} key={post.id} className="group">
+              <Link
+                href={`/posts/${post.slug}`}
+                key={post.id}
+                className="group min-w-[85vw] flex-shrink-0 snap-center md:min-w-0 md:w-auto"
+              >
                 <div className="bg-yellow-50 rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 hover:rotate-1 relative">
                   {/* Pin/Thumbtack */}
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-red-500 rounded-full shadow-lg flex items-center justify-center z-10">
