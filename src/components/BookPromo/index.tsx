@@ -61,7 +61,7 @@ export const BookPromo: React.FC<BookPromoProps> = ({ initialDownloadCount }) =>
               </p>
 
               <div className="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-400 my-8">
-                <p className="font-medium text-gray-800 mb-4">
+                <p className="font-medium text-gray-800 mb-4 text-sm md:text-base">
                   எந்தவிதக் கட்டணமும் இல்லாமல் மின்னணு புத்தகமாக வெளியாகிறது. தோழர்கள்,
                   நண்பர்களுக்கு, உறவினர்களுக்கு இதை அனுப்பி வையுங்கள்.
                 </p>
