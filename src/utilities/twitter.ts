@@ -44,23 +44,13 @@ export const getLatestTweetImages = async (): Promise<TweetImage[]> => {
   ]
 
   if (!token) {
-    console.warn('TWITTER_BEARER_TOKEN is not set. Returning mock data.')
-    return getMockImages()
+    console.warn('TWITTER_BEARER_TOKEN is not set. Returning empty.')
+    return [] // getMockImages()
   }
 
   try {
     // Twitter API V2 Endpoint
     // Fetch latest tweets from the user, including media fields
-    // Replace 'tnueforg' with actual ID if simpler, or lookup generic
-    // For this implementation, we will assume we need to lookup ID first or hardcode if known.
-    // Let's use a robust method: check user timeline.
-
-    // Note: To save API calls, you might want to hardcode the User ID for 'tnueforg' (1347065964893999104 is an example ID, need real one)
-    // For now, we'll keep it simple. If we had the ID we would use: `users/${userId}/tweets`
-
-    // Since we don't have the ID handy without a lookup, and lookups cost rate limits,
-    // let's stick to the structure:
-    // GET https://api.twitter.com/2/users/by/username/:username
 
     // 1. Get User ID
     const userRes = await fetch('https://api.twitter.com/2/users/by/username/tnueforg', {
@@ -130,6 +120,6 @@ export const getLatestTweetImages = async (): Promise<TweetImage[]> => {
     return stories
   } catch (error) {
     console.error('Error fetching tweets:', error)
-    return getMockImages() // Fallback to mock on error
+    return [] // getMockImages() // Fallback to mock on error
   }
 }
