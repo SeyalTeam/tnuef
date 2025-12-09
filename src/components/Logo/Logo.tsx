@@ -23,7 +23,7 @@ export const Logo = (props: Props) => {
       fetchPriority={priority}
       decoding="async"
       className={clsx('max-w-[4rem] w-full h-[64px]', className)}
-      src="https://upload.wikimedia.org/wikipedia/commons/4/44/Logo_of_Tamil_Nadu_Untouchability_Eradication_Front.jpg"
+      src="/logo.png"
     />
   )
 }
