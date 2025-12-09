@@ -23,7 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
       <head>
         <InitTheme />
-        <link href="/logo.png" rel="icon" type="image/png" />
+        <link href="https://tnuef.com/api/media/file/tnueflogo.jpg" rel="icon" />
       </head>
       <body>
         <Providers>
