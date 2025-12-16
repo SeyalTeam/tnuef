@@ -14,13 +14,6 @@ export const HeaderNav: React.FC<{ data: any; className?: string }> = ({ classNa
 
   const navItems = [
     {
-      href: '/#gallery',
-      label: {
-        ta: 'புகைப்படங்கள்',
-        en: 'Gallery',
-      },
-    },
-    {
       href: '/introduction',
       label: {
         ta: 'அறிமுகம்',
@@ -39,6 +32,13 @@ export const HeaderNav: React.FC<{ data: any; className?: string }> = ({ classNa
       label: {
         ta: 'தகவல் பலகை',
         en: 'News Board',
+      },
+    },
+    {
+      href: '/#gallery',
+      label: {
+        ta: 'புகைப்படங்கள்',
+        en: 'Gallery',
       },
     },
     {
