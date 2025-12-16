@@ -1,18 +1,18 @@
-import { getCachedGlobal } from '@/utilities/getGlobals'
+// import { getCachedGlobal } from '@/utilities/getGlobals'
 import Link from 'next/link'
 import React from 'react'
 
 import type { Footer, Header } from '@/payload-types'
 
-import { CMSLink } from '@/components/Link'
+// import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
-import { CategoryNav } from '@/Header/CategoryNav'
+// import { CategoryNav } from '@/Header/CategoryNav'
 import { Socials } from '@/Header/Socials'
 
 export async function Footer() {
-  const headerData: Header = await getCachedGlobal('header', 1)()
+  // const headerData: Header = await getCachedGlobal('header', 1)()
 
-  const navItems = headerData?.navItems || []
+  // const navItems = headerData?.navItems || []
 
   return (
     <footer className="mt-auto border-t border-border bg-black dark:bg-card text-white">
@@ -39,26 +39,38 @@ export async function Footer() {
 
           {/* Section 2: Navigation (Mirrored from Header) */}
           <div className="flex flex-col gap-2">
-            <div className="flex flex-row flex-wrap gap-4 items-center justify-end">
-              <CategoryNav />
-              <nav className="flex flex-row flex-wrap gap-4 items-center">
-                {navItems.map(({ link }, i) => {
-                  return (
-                    <CMSLink
-                      className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
-                      key={i}
-                      {...link}
-                    />
-                  )
-                })}
-                <Link
-                  href="/contact"
-                  className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
-                >
-                  தொடர்புக்கு
-                </Link>
-              </nav>
-            </div>
+            <nav className="flex flex-row flex-wrap gap-4 items-center justify-end">
+              <Link
+                href="/#gallery"
+                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                புகைப்படங்கள்
+              </Link>
+              <Link
+                href="/introduction"
+                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                அறிமுகம்
+              </Link>
+              <Link
+                href="/category/press-news"
+                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                பத்திரிக்கை செய்திகள்
+              </Link>
+              <Link
+                href="/category/news-board"
+                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                தகவல் பலகை
+              </Link>
+              <Link
+                href="/contact"
+                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+              >
+                தொடர்புக்கு
+              </Link>
+            </nav>
           </div>
         </div>
 

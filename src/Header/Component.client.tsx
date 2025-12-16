@@ -11,7 +11,7 @@ import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
 import { Socials } from './Socials'
 import { LanguageSwitcher } from './LanguageSwitcher'
-import { CategoryNav } from './CategoryNav'
+// import { CategoryNav } from './CategoryNav'
 import { useLanguage } from '@/providers/Language'
 
 interface HeaderClientProps {
@@ -68,7 +68,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
           {/* Right Side: Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6">
-            <CategoryNav />
             <HeaderNav data={data} />
           </div>
 
@@ -90,13 +89,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         >
           <div className="flex flex-col gap-8 pb-10">
             <div className="border-b border-white/20 pb-6">
-              <h3 className="text-white/60 text-sm font-semibold uppercase tracking-wider mb-4">
-                Categories
-              </h3>
-              <CategoryNav isMobile={true} closeMobileMenu={() => setMobileMenuOpen(false)} />
-            </div>
-
-            <div>
               <h3 className="text-white/60 text-sm font-semibold uppercase tracking-wider mb-4">
                 Menu
               </h3>

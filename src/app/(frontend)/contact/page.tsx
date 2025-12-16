@@ -79,7 +79,7 @@ export default async function ContactPage() {
 
   // Find the form block in the layout
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const formBlock = page.layout?.find((block: any) => block.blockType === 'formBlock') as any
+  const formBlock = page.layout?.find((block: any) => block.blockType === 'formBlock') as any as any
 
   return (
     <article className="pt-16 pb-24 bg-slate-50 min-h-screen">
