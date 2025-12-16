@@ -4,8 +4,12 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 import { Logo } from '@/components/Logo/Logo'
+import { HeaderNav } from '@/Header/Nav'
 import { Socials } from '@/Header/Socials'
 import { useLanguage } from '@/providers/Language'
+
+// Ensure we have a dummy data object since HeaderNav expects it, even if unused for now
+const dummyData = {}
 
 export function FooterClient() {
   const { language } = useLanguage()
@@ -42,7 +46,9 @@ export function FooterClient() {
               <div className="w-8 h-8 relative flex-shrink-0">
                 <Logo />
               </div>
-              <span className="font-bold text-base leading-tight">{orgTitle}</span>
+              <span className="font-bold text-base leading-tight whitespace-nowrap">
+                {orgTitle}
+              </span>
             </Link>
             {/* Removed Slogan */}
             <div className="mt-1">
@@ -50,40 +56,12 @@ export function FooterClient() {
             </div>
           </div>
 
-          {/* Section 2: Navigation (Mirrored from Header) */}
+          {/* Section 2: Navigation (Shared with Header) */}
           <div className="flex flex-col gap-2">
-            <nav className="flex flex-row flex-wrap gap-4 items-center justify-end">
-              <Link
-                href="/#gallery"
-                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
-              >
-                புகைப்படங்கள்
-              </Link>
-              <Link
-                href="/introduction"
-                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
-              >
-                அறிமுகம்
-              </Link>
-              <Link
-                href="/category/press-news"
-                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
-              >
-                பத்திரிக்கை செய்திகள்
-              </Link>
-              <Link
-                href="/category/news-board"
-                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
-              >
-                தகவல் பலகை
-              </Link>
-              <Link
-                href="/contact"
-                className="text-gray-300 hover:text-white transition-colors text-sm font-medium"
-              >
-                தொடர்புக்கு
-              </Link>
-            </nav>
+            <HeaderNav
+              data={dummyData}
+              className="flex-row flex-wrap gap-4 items-center justify-end !text-sm"
+            />
           </div>
         </div>
 
