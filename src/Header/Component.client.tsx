@@ -57,8 +57,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
       <div className="bg-[#D32F2F] text-white shadow-md relative">
         <div className="w-full px-4 py-4 flex justify-between items-center">
           {/* Left Side: Logo + Title */}
-          <Link href="/" className="flex items-center gap-4 flex-shrink-0 z-30 relative">
-            <Logo loading="eager" priority="high" className="h-12 md:h-16 w-auto" />
+          <Link href="/" className="flex items-center gap-2 md:gap-4 flex-shrink-0 z-30 relative">
+            <Logo loading="eager" priority="high" className="h-10 md:h-16 w-auto" />
             <div className="flex flex-col">
               <span className="text-lg md:text-2xl font-bold tracking-wide uppercase">
                 {orgTitle}
