@@ -60,7 +60,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           <Link href="/" className="flex items-center gap-4 flex-shrink-0 z-30 relative">
             <Logo loading="eager" priority="high" className="h-12 md:h-16 w-auto" />
             <div className="flex flex-col">
-              <span className="text-lg md:text-2xl font-bold tracking-wide uppercase leading-tight whitespace-nowrap">
+              <span className="text-lg md:text-2xl font-bold tracking-wide uppercase">
                 {orgTitle}
               </span>
             </div>
