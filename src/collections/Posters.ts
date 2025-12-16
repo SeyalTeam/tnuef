@@ -35,5 +35,12 @@ export const Posters: CollectionConfig = {
         description: 'Show/hide this image in posters',
       },
     },
+    {
+      name: 'link',
+      type: 'text',
+      admin: {
+        description: 'External link for the poster (e.g. Twitter post)',
+      },
+    },
   ],
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
 
 import type { Header as HeaderType } from '@/payload-types'
 
@@ -24,6 +25,9 @@ export const HeaderNav: React.FC<{ data: HeaderType; className?: string }> = ({
           />
         )
       })}
+      <Link href="/contact" className="text-white hover:text-gray-200 font-medium text-lg">
+        தொடர்புக்கு
+      </Link>
     </nav>
   )
 }

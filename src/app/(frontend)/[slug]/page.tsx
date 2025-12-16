@@ -23,6 +23,7 @@ import { LeadersBanner } from '@/components/LeadersBanner'
 import { BookPromo } from '@/components/BookPromo'
 import { TwitterStories } from '@/components/TwitterStories'
 import { getLatestTweetImages } from '@/utilities/twitter'
+import { PosterSlider } from '@/components/PosterSlider'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -81,10 +82,11 @@ export default async function Page({ params: paramsPromise }: Args) {
   let sliderData: any[] = []
   let latestPosts: any[] = []
   let tweetImages: any[] = [] // Twitter stories data
+  let postersData: any[] = [] // Posters data
 
   if (slug === 'home') {
-    // Fetch Twitter images (stories)
-    tweetImages = await getLatestTweetImages()
+    // Fetched later after checking site settings
+    // tweetImages = await getLatestTweetImages()
 
     const payload = await getPayload({ config: configPromise })
     const sliders = await payload.find({
@@ -133,6 +135,25 @@ export default async function Page({ params: paramsPromise }: Args) {
       depth: 1, // Populate relationships like heroImage
     })
     latestPosts = posts.docs
+    // Fetch Posters
+    const postersQuery = await payload.find({
+      collection: 'posters',
+      where: {
+        active: {
+          equals: true,
+        },
+      },
+      sort: '-updatedAt', // Default to recently updated
+      limit: 10,
+      depth: 1,
+    })
+
+    postersData = postersQuery.docs.map((doc: any) => ({
+      id: doc.id,
+      title: doc.title,
+      image: doc.image,
+      link: doc.link,
+    }))
   }
 
   // Fetch Introduction page data
@@ -161,14 +182,25 @@ export default async function Page({ params: paramsPromise }: Args) {
   if (slug === 'home') {
     const payload = await getPayload({ config: configPromise })
 
-    // Fetch site settings for download count
+    // Fetch site settings first to check for Twitter toggle
+    let enableTwitterFeed = true // Default to true if not found
     try {
       const siteSettings = await payload.findGlobal({
         slug: 'site-settings' as any,
       })
       bookDownloadCount = (siteSettings as any).bookDownloadCount || 0
+
+      // Explicitly check boolean, because it could be false
+      if (typeof (siteSettings as any).enableTwitterFeed === 'boolean') {
+        enableTwitterFeed = (siteSettings as any).enableTwitterFeed
+      }
     } catch (error) {
       console.error('Error fetching site settings', error)
+    }
+
+    if (enableTwitterFeed) {
+      // Fetch Twitter images (stories) only if enabled
+      tweetImages = await getLatestTweetImages()
     }
 
     // Find the news-board category first
@@ -239,6 +271,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 
           {/* Twitter Stories - Only on homepage */}
           {tweetImages.length > 0 && <TwitterStories stories={tweetImages} />}
+
+          {/* Poster Slider - Only on homepage */}
+          {postersData.length > 0 && <PosterSlider posters={postersData} />}
 
           {/* Latest Posts - Only on homepage */}
           {latestPosts.length > 0 && <LatestPosts posts={latestPosts} />}

@@ -854,6 +854,10 @@ export interface Poster {
    * Show/hide this image in posters
    */
   active?: boolean | null;
+  /**
+   * External link for the poster (e.g. Twitter post)
+   */
+  link?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1453,6 +1457,7 @@ export interface PostersSelect<T extends boolean = true> {
   title?: T;
   image?: T;
   active?: T;
+  link?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1819,6 +1824,7 @@ export interface Footer {
 export interface SiteSetting {
   id: string;
   bookDownloadCount?: number | null;
+  enableTwitterFeed?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1874,6 +1880,7 @@ export interface FooterSelect<T extends boolean = true> {
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
   bookDownloadCount?: T;
+  enableTwitterFeed?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

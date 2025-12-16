@@ -11,6 +11,15 @@ export const SiteSettings: GlobalConfig = {
       name: 'bookDownloadCount',
       type: 'number',
       defaultValue: 0,
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: 'enableTwitterFeed',
+      type: 'checkbox',
+      label: 'Enable Twitter Feed Display',
+      defaultValue: true,
     },
   ],
 }
