@@ -41,14 +41,12 @@ export function FooterClient() {
       <div className="container py-4 flex flex-col gap-4 md:gap-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           {/* Section 1: Branding */}
-          <div className="flex flex-col gap-2 max-w-sm">
-            <Link className="flex items-center gap-2" href="/">
+          <div className="flex flex-col gap-2 max-w-sm min-w-0">
+            <Link className="flex items-center gap-2 min-w-0" href="/">
               <div className="w-8 h-8 relative flex-shrink-0">
                 <Logo />
               </div>
-              <span className="font-bold text-base leading-tight whitespace-nowrap">
-                {orgTitle}
-              </span>
+              <span className="font-bold text-sm sm:text-base leading-tight">{orgTitle}</span>
             </Link>
             {/* Removed Slogan */}
             <div className="mt-1">
