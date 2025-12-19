@@ -57,12 +57,12 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
       <div className="bg-[#D32F2F] text-white shadow-md relative">
         <div className="w-full px-4 py-4 flex justify-between items-center">
           {/* Left Side: Logo + Title */}
-          <Link href="/" className="flex items-center gap-2 md:gap-4 flex-shrink-0 z-30 relative">
+          <Link href="/" className="flex items-center gap-2 md:gap-4 z-30 relative min-w-0">
             <div className="relative h-10 w-10 md:h-16 md:w-16 shrink-0">
               <Logo loading="eager" priority="high" className="w-full h-full object-contain" />
             </div>
-            <div className="flex flex-col">
-              <span className="text-lg md:text-2xl font-bold tracking-wide uppercase">
+            <div className="flex flex-col min-w-0">
+              <span className="text-base sm:text-lg md:text-2xl font-bold tracking-wide uppercase leading-tight">
                 {orgTitle}
               </span>
             </div>
