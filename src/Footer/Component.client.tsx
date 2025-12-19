@@ -4,12 +4,8 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 import { Logo } from '@/components/Logo/Logo'
-import { HeaderNav } from '@/Header/Nav'
 import { Socials } from '@/Header/Socials'
 import { useLanguage } from '@/providers/Language'
-
-// Ensure we have a dummy data object since HeaderNav expects it, even if unused for now
-const dummyData = {}
 
 export function FooterClient() {
   const { language } = useLanguage()
@@ -52,14 +48,6 @@ export function FooterClient() {
             <div className="mt-1">
               <Socials />
             </div>
-          </div>
-
-          {/* Section 2: Navigation (Shared with Header) */}
-          <div className="flex flex-col gap-2">
-            <HeaderNav
-              data={dummyData}
-              className="flex-row flex-wrap gap-4 items-center justify-end !text-sm"
-            />
           </div>
         </div>
 
