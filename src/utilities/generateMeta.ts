@@ -7,13 +7,20 @@ import { getServerSideURL } from './getURL'
 
 const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
   const serverUrl = getServerSideURL()
+  const toAbsoluteURL = (url?: string | null) => {
+    if (!url) return null
+
+    return url.startsWith('http://') || url.startsWith('https://') ? url : `${serverUrl}${url}`
+  }
 
   let url = 'https://tnuef.com/api/media/file/tnueflogo.jpg'
 
   if (image && typeof image === 'object' && 'url' in image) {
-    const ogUrl = image.sizes?.og?.url
+    const resolvedImageURL = toAbsoluteURL(image.sizes?.og?.url) || toAbsoluteURL(image.url)
 
-    url = ogUrl ? serverUrl + ogUrl : serverUrl + image.url
+    if (resolvedImageURL) {
+      url = resolvedImageURL
+    }
   }
 
   return url
